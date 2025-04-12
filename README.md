@@ -1,13 +1,223 @@
-import React from "react"; import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-
-function Home() { return ( <div className="min-h-screen bg-pink-100 text-gray-800 p-6"> <header className="text-center mb-10"> <h1 className="text-4xl font-bold text-pink-600">Diamond Creation</h1> <p className="text-lg mt-2">Explore our delightful range of pastel stationery</p> </header> <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"> {["Notebooks", "Pens", "Stickers", "Planners", "Art Supplies", "Envelopes"].map((item) => ( <div key={item} className="bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition"> <h2 className="text-xl font-semibold text-pink-500">{item}</h2> <p className="text-sm mt-1">High-quality and charming {item.toLowerCase()} for every mood.</p> </div> ))} </main> <footer className="mt-10 text-center"> <Link to="/about" className="text-pink-600 underline">Learn more about us</Link> </footer> </div> ); }
-
-function About() { return ( <div className="min-h-screen bg-purple-100 text-gray-800 p-6"> <header className="text-center mb-10"> <h1 className="text-4xl font-bold text-purple-600">About Diamond Creation</h1> <p className="text-lg mt-2">Where creativity meets quality in pastel perfection.</p> </header> <section className="max-w-3xl mx-auto text-center"> <p className="text-md mb-4"> Diamond Creation is your go-to destination for beautiful, functional, and inspiring stationery. Whether you're a student, an artist, or just someone who loves writing, our pastel-themed products bring a touch of charm and joy to your everyday tasks. </p> <Link to="/" className="text-purple-600 underline">Back to Home</Link> </section> </div> ); }
-
-export default function App() { return ( <Router> <Routes> <Route path="/" element={<Home />} /> <Route path="/about" element={<About />} /> </Routes> </Router> ); }
- </section>
- <footer>
- <p>&copy;2025Diamond Creation.All right reserved.</p>
- </footer>
- </body>
- </html>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diamond Creation - Shop Pastel Stationery</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #FFFBF0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #FFD6A5, #D7C4F0);
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #6A4C93;
+    }
+    nav {
+      background: #A0E7E5;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #6A4C93;
+    }
+    .hero {
+      background: #B9FBC0;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      background: #FFCBDD;
+    }
+    .product {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+    }
+    .product h3 {
+      margin: 0.5rem 0 0.25rem;
+    }
+    .product button {
+      margin-top: 0.5rem;
+      background-color: #6A4C93;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .product button:hover {
+      background-color: #5a3a7e;
+    }
+    .about, .contact {
+      padding: 2rem;
+      background-color: #D7C4F0;
+      text-align: center;
+    }
+    .about h2, .contact h2 {
+      color: #6A4C93;
+    }
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .contact button {
+      padding: 0.75rem;
+      background-color: #6A4C93;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cart {
+      padding: 2rem;
+      background: #FFD6A5;
+      text-align: center;
+    }
+    .cart h2 {
+      margin-bottom: 1rem;
+    }
+    .cart-items {
+      max-width: 600px;
+      margin: auto;
+      text-align: left;
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .cart-items p {
+      margin: 0.5rem 0;
+    }
+    .checkout-btn {
+      margin-top: 1rem;
+      background-color: #6A4C93;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      background: #6A4C93;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Diamond Creation</h1>
+    <p>Your go-to place for cute and colorful stationery!</p>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#cart">Cart</a>
+  </nav>
+  <section class="hero">
+    <h2>Welcome to Diamond Creation</h2>
+    <p>Explore our beautiful collection of pastel-themed stationery, designed to inspire creativity and bring joy to your workspace.</p>
+  </section>
+  <section id="shop" class="products">
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Notebook">
+      <h3>Pastel Notebook</h3>
+      <p>$5.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Pens">
+      <h3>Colorful Gel Pens</h3>
+      <p>$3.49</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Stickers">
+      <h3>Sticker Pack</h3>
+      <p>$2.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Highlighters">
+      <h3>Mini Highlighter Set</h3>
+      <p>$4.29</p>
+      <button>Add to Cart</button>
+    </div>
+  </section>
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>Diamond Creation was founded with a passion for art and creativity. Our goal is to bring vibrant, inspiring stationery to everyone who loves design, journaling, and self-expression. Every item is curated with love and a splash of pastel joy!</p>
+  </section>
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+  <section id="cart" class="cart">
+    <h2>Your Cart</h2>
+    <div class="cart-items">
+      <p>No items in cart yet.</p>
+    </div>
+    <button class="checkout-btn">Checkout</button>
+  </section>
+  <footer>
+    <p>&copy; 2025 Diamond Creation. All rights reserved.</p>
+  </footer>
+</body>
+</html>
