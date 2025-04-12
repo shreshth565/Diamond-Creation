@@ -1,8 +1,17 @@
-<!DOCTYPE html><html lang="en">
+  <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diamond Creation - Shop Pastel Stationery</title>
+  <meta name="description" content="Diamond Creation offers a vibrant collection of pastel-themed stationery. Shop notebooks, pens, stickers, and more!">
+  <meta property="og:title" content="Diamond Creation - Shop Pastel Stationery">
+  <meta property="og:description" content="Your go-to place for cute and colorful stationery!">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diamond Creation - Shop Pastel Stationery">
+  <meta name="twitter:description" content="Explore our beautiful pastel stationery collection.">
+  <meta name="twitter:image" content="logo.png">
   <style>
     body {
       margin: 0;
@@ -15,8 +24,12 @@
       padding: 2rem;
       text-align: center;
     }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+    }
     header h1 {
-      margin: 0;
+      margin: 0.5rem 0 0;
       font-size: 2.5rem;
       color: #6A4C93;
     }
@@ -152,19 +165,28 @@
       text-align: center;
       padding: 1rem;
     }
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Diamond Creation Logo">
     <h1>Diamond Creation</h1>
     <p>Your go-to place for cute and colorful stationery!</p>
   </header>
   <nav>
     <a href="#">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="#cart">Cart</a>
+    <a href="#shop" aria-label="Shop Section">Shop</a>
+    <a href="#about" aria-label="About Section">About</a>
+    <a href="#contact" aria-label="Contact Section">Contact</a>
+    <a href="#cart" aria-label="Cart Section">Cart</a>
   </nav>
   <section class="hero">
     <h2>Welcome to Diamond Creation</h2>
@@ -175,25 +197,25 @@
       <img src="https://via.placeholder.com/150" alt="Notebook">
       <h3>Pastel Notebook</h3>
       <p>$5.99</p>
-      <button>Add to Cart</button>
+      <button onclick="addToCart('Pastel Notebook', 5.99)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://via.placeholder.com/150" alt="Pens">
       <h3>Colorful Gel Pens</h3>
       <p>$3.49</p>
-      <button>Add to Cart</button>
+      <button onclick="addToCart('Colorful Gel Pens', 3.49)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://via.placeholder.com/150" alt="Stickers">
       <h3>Sticker Pack</h3>
       <p>$2.99</p>
-      <button>Add to Cart</button>
+      <button onclick="addToCart('Sticker Pack', 2.99)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://via.placeholder.com/150" alt="Highlighters">
       <h3>Mini Highlighter Set</h3>
       <p>$4.29</p>
-      <button>Add to Cart</button>
+      <button onclick="addToCart('Mini Highlighter Set', 4.29)">Add to Cart</button>
     </div>
   </section>
   <section id="about" class="about">
@@ -203,15 +225,18 @@
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
   <section id="cart" class="cart">
     <h2>Your Cart</h2>
-    <div class="cart-items">
+    <div class="cart-items" id="cart-items">
       <p>No items in cart yet.</p>
     </div>
     <button class="checkout-btn">Checkout</button>
@@ -219,5 +244,20 @@
   <footer>
     <p>&copy; 2025 Diamond Creation. All rights reserved.</p>
   </footer>
+  <script>
+    const cart = [];
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      updateCart();
+    }
+    function updateCart() {
+      const container = document.getElementById('cart-items');
+      if (cart.length === 0) {
+        container.innerHTML = '<p>No items in cart yet.</p>';
+      } else {
+        container.innerHTML = cart.map(c => `<p>${c.item} - $${c.price.toFixed(2)}</p>`).join('');
+      }
+    }
+  </script>
 </body>
 </html>
