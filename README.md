@@ -2,269 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Diamond Creation - Stationery Shop</title>
-  <meta name="description" content="Shop colorful pastel stationery from Diamond Creation.">
-  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamond Stationers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #FFFBF0;
-      color: #333;
+    :root {
+      --primary: #B4E9E2;
+      --secondary: #FFC3A0;
+      --accent: #D3B5E5;
+      --highlight: #FFD6E0;
+      --background: #FFF8F1;
+      --text: #3D3D4E;
     }
 
-    /* Splash */
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeOut 2s ease-out forwards;
-      animation-delay: 2.5s;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
     }
-    .splash-logo {
-      height: 120px;
+
+    body {
+      background-color: var(--background);
+      padding-top: 4rem;
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
     }
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        url('https://cdn-icons-png.flaticon.com/512/2875/2875430.png'),
+        url('https://cdn-icons-png.flaticon.com/512/2875/2875450.png'),
+        url('https://cdn-icons-png.flaticon.com/512/2875/2875466.png'),
+        url('https://cdn-icons-png.flaticon.com/512/189/189690.png'),
+        url('https://cdn-icons-png.flaticon.com/512/2329/2329078.png');
+      background-repeat: repeat;
+      background-size: 60px;
+      background-position: 0 0, 150px 150px, 300px 100px, 400px 200px, 100px 300px;
+      opacity: 0.06;
+      z-index: 0;
     }
 
     header {
-      background: linear-gradient(135deg, #FFD6A5, #D7C4F0);
-      padding: 1rem;
-      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+
     header img {
-      height: 60px;
-    }
-    header h1 {
-      margin: 0.5rem 0 0.2rem;
-    }
-    header p {
-      margin: 0;
-      font-style: italic;
-      font-weight: 500;
+      height: 40px;
     }
 
-    nav {
-      background: #A0E7E5;
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
     nav a {
+      margin: 0 1rem;
+      color: var(--text);
       text-decoration: none;
-      color: #333;
       font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    #diamond-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      animation: shine 2s ease-out forwards;
+    }
+
+    #diamond-popup img {
+      width: 80px;
+      animation: rotateDiamond 2s linear infinite;
+    }
+
+    @keyframes shine {
+      0% {opacity: 0; transform: scale(0.5) translate(-50%, -50%);}
+      50% {opacity: 1; transform: scale(1.2) translate(-50%, -50%);}
+      100% {opacity: 0; transform: scale(0.5) translate(-50%, -50%);}
+    }
+
+    @keyframes rotateDiamond {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
       position: relative;
-      padding-bottom: 4px;
-    }
-    nav a:hover,
-    nav a.active {
-      color: #6A4C93;
-      border-bottom: 2px solid #6A4C93;
-    }
-
-    section {
-      padding: 2rem;
-    }
-
-    .hero {
-      background: #B9FBC0;
-      text-align: center;
-      padding: 2rem;
-      border-radius: 10px;
-    }
-
-    .products {
-      background: #FFCBDD;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    .product {
-      background: white;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
-
-    .product:hover {
-      transform: scale(1.02);
-    }
-
-    .product img {
-      width: 100%;
-      max-height: 150px;
-      object-fit: contain;
-    }
-
-    .product button {
-      background-color: #6A4C93;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      margin-top: 0.5rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .product button:hover {
-      background-color: #59347e;
-    }
-
-    .about, .contact, .cart {
-      background: #D7C4F0;
-      border-radius: 10px;
-    }
-
-    .contact form {
-      max-width: 500px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    input, textarea {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button[type="submit"] {
-      background-color: #6A4C93;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #59347e;
-    }
-
-    .cart-items {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 1rem;
-      border-radius: 10px;
+      z-index: 1;
     }
 
     footer {
-      background: #6A4C93;
+      background: var(--secondary);
       color: white;
       text-align: center;
       padding: 1rem;
     }
 
-    .hidden {
-      display: none;
+    #camera-section {
+      margin: 2rem auto;
+      text-align: center;
     }
 
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .products {
-        grid-template-columns: 1fr;
-      }
+    #video {
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .filter-section {
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .filter-section select {
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid var(--accent);
     }
   </style>
 </head>
 <body>
-  <!-- Splash -->
-  <div id="splash-screen">
-    <img src="logo.png" alt="Diamond Creation Logo" class="splash-logo">
+  <div id="diamond-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/3468/3468373.png" alt="diamond" />
   </div>
-
-  <!-- Header -->
   <header>
-    <img src="logo.png" alt="Diamond Creation Logo">
-    <h1>Diamond Creation</h1>
-    <p>Your pastel stationery paradise</p>
+    <img src="your-logo.png" alt="Diamond Stationers">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#cart">Cart</a>
+      <a href="#login">Login</a>
+    </nav>
   </header>
 
-  <!-- Navigation -->
-  <nav aria-label="Main navigation">
-    <a href="#" onclick="showPage('home', this)">Home</a>
-    <a href="#" onclick="showPage('shop', this)">Shop</a>
-    <a href="#" onclick="showPage('about', this)">About</a>
-    <a href="#" onclick="showPage('contact', this)">Feedback</a>
-    <a href="#" onclick="showPage('cart', this)">Cart</a>
-  </nav>
+  <main class="container">
+    <h1>Welcome to Diamond Stationers</h1>
+    <p>Best place for all your stationery needs!</p>
 
-  <!-- Pages -->
-  <section id="home">
-    <div class="hero">
-      <h2>Welcome to Diamond Creation</h2>
-      <p>Explore pastel stationery that sparks creativity and joy!</p>
-    </div>
-  </section>
+    <section id="camera-section">
+      <h2>Find Products by Image</h2>
+      <video id="video" autoplay></video><br>
+      <button onclick="capturePhoto()">Capture & Search</button>
+    </section>
 
-  <section id="shop" class="hidden">
-    <h2>Our Products</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Pastel Notebook">
-        <h3>Pastel Notebook</h3>
-        <p>$5.99</p>
-        <button onclick="addToCart('Pastel Notebook', 5.99)">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Colorful Gel Pens">
-        <h3>Colorful Gel Pens</h3>
-        <p>$3.49</p>
-        <button onclick="addToCart('Colorful Gel Pens', 3.49)">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Sticker Pack">
-        <h3>Sticker Pack</h3>
-        <p>$2.99</p>
-        <button onclick="addToCart('Sticker Pack', 2.99)">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Mini Highlighter Set">
-        <h3>Mini Highlighter Set</h3>
-        <p>$4.29</p>
-        <button onclick="addToCart('Mini Highlighter Set', 4.29)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
+    <section class="filter-section">
+      <h2>Filter Products</h2>
+      <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="pens">Pens</option>
+        <option value="notebooks">Notebooks</option>
+        <option value="markers">Markers</option>
+        <option value="accessories">Accessories</option>
+      </select>
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
+      </select>
+      <button onclick="applyFilters()">Apply</button>
+    </section>
+  </main>
 
-  <section id="about" class="hidden about">
-    <h2>About Diamond Creation</h2>
-    <p>We’re passionate about pastel, paper, and pens. Based on creativity and quality, Diamond Creation offers hand-picked stationery that makes organizing fun again!</p>
-  </section>
+  <footer>
+    &copy; 2025 Diamond Stationers. All rights reserved.
+  </footer>
 
-  <section id="contact" class="hidden contact">
-    <h2>Feedback & Suggestions</h2>
-    <form id="feedback-form">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" rows="5" placeholder="Your Feedback" required></textarea>
-      <button type="submit">Send Feedback</button>
-    </form>
-    <p id="form-status" style="text-align:center;margin-top:1rem;"></p>
-  </section>
+  <script>
+    window.addEventListener('load', () => {
+      const popup = document.getElementById('diamond-popup');
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 2000);
 
-  <section id="cart" class="hidden cart">
-   
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            video.play();
+          })
+          .catch(function(err) {
+            console.error("Camera access error:", err);
+          });
+      }
+    });
+
+    function capturePhoto() {
+      alert("This feature will match captured item with available products (AI-powered coming soon!)");
+    }
+
+    function applyFilters() {
+      const category = document.getElementById('categoryFilter').value;
+      const price = document.getElementById('priceFilter').value;
+      alert(`Filtering by category: ${category}, price: ${price}`);
+      // Filtering logic will go here in future updates
+    }
+  </script>
+</body>
+</html>
